@@ -1,0 +1,39 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+}
+html {
+  font-family: sans-serif;
+}
+* {
+  box-sizing: border-box;
+}
+
+main {
+  display: block;
+  min-height: calc(100vh - 240px);
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  li {
+    display: block;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.inner {
+  max-width: 1090px;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+@media screen and (max-width: 760px) {
+  .inner {
+    max-width: calc(100% - 20px);
+  }
+}

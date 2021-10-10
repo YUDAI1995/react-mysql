@@ -1,0 +1,64 @@
+$deleteBtn-color: #ffffff;
+
+.TodoList {
+  position: relative;
+  margin-top: 30px;
+
+  li {
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+    border-radius: 4px;
+    padding: 6px 160px 6px 10px;
+    cursor: pointer;
+    z-index: 10;
+    transition: 0.3s;
+    
+
+    &:hover {
+      background: #ffefde;
+    }
+
+    & + li {
+      margin-top: 16px;
+    }
+
+    .todoItem {
+      display: flex;
+      align-items: center;
+
+      .checkBox {
+        & + .text {
+          margin-left: 20px;
+        }
+      }
+      .text {
+        word-break: break-all;
+      }
+    }
+  }
+
+  .deleteBtn {
+    position: absolute;
+    display: inline;
+    color: $deleteBtn-color;
+    background-color: #f07070;
+    top: 50%;
+    right: 30px;
+    min-width: 84px;
+    margin-top: -15px;
+    border: 0;
+    border-radius: 24px;
+    padding: 8px 20px;
+    transition: 0.3s;
+    outline: 0;
+    z-index: 20;
+    cursor: pointer;
+
+    &:hover,
+    :active {
+      color: #ffffff;
+      background-color: #ec2727;
+    }
+  }
+}
