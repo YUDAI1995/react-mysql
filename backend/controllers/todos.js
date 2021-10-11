@@ -1,14 +1,5 @@
 const Todo = require("../models/todo");
 
-function getUniqueStr(myStrong) {
-  var strong = 1000;
-  if (myStrong) strong = myStrong;
-  return (
-    new Date().getTime().toString(16) +
-    Math.floor(strong * Math.random()).toString(16)
-  );
-}
-
 const mysql = require("mysql");
 const CLEARDB_URL = process.env.CLEARDB_DATABASE_URL;
 const params = CLEARDB_URL.replace("mysql://", "").split(/[:@/?]/);
@@ -29,7 +20,7 @@ pool.query(sql, (error, results, fields) => {
 });
 
 exports.createTodo = (req, res, next) => {
-  const newTodo = new Todo(getUniqueStr(), req.body.text, req.body.isDone);
+  const newTodo = new Todo(req.body.id, req.body.text, req.body.isDone);
 
   pool.getConnection((error, connection) => {
     connection.query(
