@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Todo, TodoItem, getUniqueStr } from "./models/Todolist.model";
 import { Header } from "./components/Header";
 import { FormTodo } from "./components/FormTodo";
 import { TodoList } from "./components/TodoList";
 import { Footer } from "./components/Footer";
+import { validate } from "class-validator";
 
-const App = () => {
-  const [todos, setTodos] = useState([]);
+export const App: React.FC = () => {
+  const [todos, setTodos] = useState<Todo[]>([]);
 
   const apiReqest = () => {
     fetch("/api")
@@ -28,24 +30,32 @@ const App = () => {
     apiReqest();
   }, []);
 
-  const onAddHandler = (enteredText) => {
-    fetch("/api", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        text: enteredText,
-        isDone: false,
-      }),
-    })
-      .then(apiReqest)
+  const onAddHandler = (enteredText: string) => {
+    const newTodo = new TodoItem(getUniqueStr(), enteredText, false);
+    validate(newTodo)
+      .then((errors) => {
+        if (errors.length > 0) {
+          throw new Error("Not entered.");
+        }
+
+        fetch("/api", {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newTodo),
+        })
+          .then(apiReqest)
+          .catch((error) => {
+            console.log(error);
+          });
+      })
       .catch((error) => {
-        console.log(error);
+        alert("Please enter something to do.");
       });
   };
-  const onDeleteHandler = (deleteId) => {
+  const onDeleteHandler = (deleteId: string) => {
     fetch(`/api/${deleteId}`, {
       method: "DELETE",
     })
@@ -54,7 +64,7 @@ const App = () => {
         console.log(error);
       });
   };
-  const onCheckHandler = (todo) => {
+  const onCheckHandler = (todo: Todo) => {
     fetch(`/api/${todo.id}`, {
       method: "PATCH",
       headers: {
@@ -89,5 +99,3 @@ const App = () => {
     </div>
   );
 };
-
-export default App;

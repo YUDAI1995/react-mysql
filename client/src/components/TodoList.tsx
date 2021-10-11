@@ -1,9 +1,14 @@
+import React from "react";
+import { Todo } from "../models/Todolist.model";
 import "../styles/TodoList.scss";
 
-export const TodoList = (props) => {
-  const onDeleteHandler = (id) => {
-    props.onDeleteTodo(id);
-  };
+interface TodoListProps {
+  todos: Todo[];
+  onCheckHandler: (todo: Todo) => void;
+  onDeleteTodo: (id: string) => void;
+}
+
+export const TodoList:React.FC<TodoListProps> = (props) => {
 
   return (
     <ul className="TodoList">
@@ -15,12 +20,16 @@ export const TodoList = (props) => {
         >
           <div className="todoItem">
             <div className="checkBox">
-              <input type="checkbox" checked={todo.isDone} onChange={() => {}} />
+              <input
+                type="checkbox"
+                checked={todo.isDone}
+                onChange={() => {}}
+              />
             </div>
             <p className="text">{todo.text}</p>
           </div>
           <button
-            onClick={onDeleteHandler.bind(null, todo.id)}
+            onClick={props.onDeleteTodo.bind(null, todo.id)}
             className="deleteBtn"
           >
             Delete
