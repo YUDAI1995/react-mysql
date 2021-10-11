@@ -1,14 +1,13 @@
 form {
   display: flex;
-  align-items: flex-end;
-  margin: 0 60px;
+  align-items: center;
+  max-width: 600px;
+  margin: 0 auto;
 
   .inputForm {
+    display: block;
     width: 100%;
-  }
-
-  input {
-    font: inherit;
+    height: 36px;
     border: 1px solid #d1d1d1;
     border-radius: 4px;
     padding: 6px 10px;
@@ -24,36 +23,39 @@ form {
     }
   }
 
-  button {
+  #addBtn {
     width: 160px;
-    max-height: 42px;
-    font-size: 14px;
+    font-size: 16px;
     color: #ffffff;
     word-break: break-all;
     background: #ff922d;
     margin-left: 20px;
     border: 0;
     border-radius: 6px;
-    padding: 8px 10px;
+    padding: 10px 10px;
     cursor: pointer;
     transition: 0.3s;
-  }
-
-  button:focus {
     outline: none;
-  }
 
-  button:hover,
-  button:active {
-    color: #ff5e2d;
-    background: #ffd7b3;
+    &:hover,
+    &:active {
+      color: #ff5e2d;
+      background: #ffd7b3;
+    }
   }
 }
 
-.form-control {
-  margin-bottom: 1rem;
-}
-input {
-  display: block;
-  width: 100%;
+@media screen and (max-width: 760px) {
+  form {
+    display: block;
+    max-width: 100%;
+    margin: 0 20px;
+
+    #addBtn {
+      width: 100%;
+      margin-left: 0;
+      margin-top: 10px;
+      padding: 12px 10px;
+    }
+  }
 }

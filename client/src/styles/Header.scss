@@ -11,3 +11,12 @@ header {
     margin: 0;
   }
 }
+
+@media screen and (max-width: 760px) {
+  header {
+    margin-bottom: 20px;
+    h1 {
+      margin-left: 10px;
+    }
+  }
+}

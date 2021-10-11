@@ -65,7 +65,9 @@ export const App: React.FC = () => {
       });
   };
   const onCheckHandler = (todo: Todo) => {
-    fetch(`/api/${todo.id}`, {
+    console.log("patch");
+    
+    fetch(`api/${todo.id}`, {
       method: "PATCH",
       headers: {
         Accept: "application/json",

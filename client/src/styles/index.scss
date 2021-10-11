@@ -34,7 +34,11 @@ ol {
   padding: 0 10px;
 }
 @media screen and (max-width: 760px) {
+  main {
+    min-height: calc(100vh - 210px);
+  }
   .inner {
-    max-width: calc(100% - 20px);
+    max-width: 100%;
+    padding: 0 5px;
   }
 }

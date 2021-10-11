@@ -8,7 +8,14 @@ interface TodoListProps {
   onDeleteTodo: (id: string) => void;
 }
 
-export const TodoList:React.FC<TodoListProps> = (props) => {
+export const TodoList: React.FC<TodoListProps> = (props) => {
+  const onDeleteHandler = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    id: string
+  ) => {
+    event.stopPropagation();
+    props.onDeleteTodo(id);
+  };
 
   return (
     <ul className="TodoList">
@@ -19,17 +26,17 @@ export const TodoList:React.FC<TodoListProps> = (props) => {
           onClick={props.onCheckHandler.bind(null, todo)}
         >
           <div className="todoItem">
-            <div className="checkBox">
-              <input
-                type="checkbox"
-                checked={todo.isDone}
-                onChange={() => {}}
-              />
-            </div>
+            <input
+              type="checkbox"
+              id="checkBox"
+              className="checkBox"
+              checked={todo.isDone}
+              onChange={() => {}}
+            />
             <p className="text">{todo.text}</p>
           </div>
           <button
-            onClick={props.onDeleteTodo.bind(null, todo.id)}
+            onClick={(e) => onDeleteHandler(e, todo.id)}
             className="deleteBtn"
           >
             Delete
